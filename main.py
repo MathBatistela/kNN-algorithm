@@ -4,7 +4,6 @@ import pandas as pd
 import knn as knn
 
 from scipy.spatial import distance
-from scipy import stats
 
 def min_max(attribute):
     return (attribute - attribute.min())/(attribute.max() - attribute.min())
@@ -33,7 +32,7 @@ if __name__ == "__main__":
     training_norm_df = normalize(training_matrix,z_score)
     test_norm_df = normalize(test_matrix,z_score)
     
-    _object = test_norm_df.iloc[201].values
+    _object = test_norm_df.iloc[0].values
     
     _knn = knn.KNeighbors(n_neighbors=3)
     
