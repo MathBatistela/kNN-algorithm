@@ -6,8 +6,11 @@ import knn as knn
 from scipy.spatial import distance
 from scipy import stats
 
-def min_max(a):
-    return (a - a.min())/(a.max() - a.min())
+def min_max(attribute):
+    return (attribute - attribute.min())/(attribute.max() - attribute.min())
+
+def z_score(attribute):
+    return (attribute - attribute.mean())/attribute.std()
 
 def normalize(data_matrix,normalization):
     df = pd.DataFrame(data_matrix,index=data_matrix[:,-1].astype(int))
@@ -27,11 +30,10 @@ if __name__ == "__main__":
         print("File does not exist")
         
    
-    training_norm_df = normalize(training_matrix,min_max)
-    test_norm_df = normalize(test_matrix,min_max)
-
+    training_norm_df = normalize(training_matrix,z_score)
+    test_norm_df = normalize(test_matrix,z_score)
     
-    _object = test_norm_df.iloc[101].values
+    _object = test_norm_df.iloc[201].values
     
     _knn = knn.KNeighbors(n_neighbors=3)
     
