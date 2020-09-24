@@ -40,12 +40,11 @@ class KNeighbors:
             neighbor_distance = self.calc_distance(new_object,_object.values)
 
             nearest_neighbors.sort(key=lambda dist: dist[0], reverse=True)
-            for value in nearest_neighbors:
-                if neighbor_distance < value[0]:
-                    value[0] = neighbor_distance
-                    value[1] = _class
-                    break
+            if neighbor_distance < nearest_neighbors[0][0]:
+                nearest_neighbors[0][0] = neighbor_distance
+                nearest_neighbors[0][1] = _class
         
+        print(nearest_neighbors)
         nearest_neighbors = [_class[1] for _class in nearest_neighbors]
         
         return mode(nearest_neighbors)    

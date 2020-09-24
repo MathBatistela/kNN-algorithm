@@ -3,8 +3,6 @@ import numpy as np
 import pandas as pd
 import knn as knn
 
-from scipy.spatial import distance
-
 def min_max(attribute):
     return (attribute - attribute.min())/(attribute.max() - attribute.min())
 
@@ -29,12 +27,14 @@ if __name__ == "__main__":
         print("File does not exist")
         
    
-    training_norm_df = normalize(training_matrix,z_score)
-    test_norm_df = normalize(test_matrix,z_score)
+    training_norm_df = normalize(training_matrix,min_max)
+    test_norm_df = normalize(test_matrix,min_max)
     
     _object = test_norm_df.iloc[0].values
     
     _knn = knn.KNeighbors(n_neighbors=3)
+    
+    _knn.set_distance_type("manhattam")
     
     _knn.set_training_data(training_norm_df)
     
