@@ -58,12 +58,13 @@ if __name__ == "__main__":
         
     instances = []
         
+    
     for percent in (0.25,0.5,1):  
           
         for normalization in (min_max,z_score):
             
+            test_norm_df = normalize(test_matrix,normalization)
             training_norm_df = reduce_dataframe(normalize(training_matrix,normalization),percent)
-            test_norm_df = reduce_dataframe(normalize(test_matrix,normalization),percent)
             
             for distance in ("euclidean","manhattan"):
                 
